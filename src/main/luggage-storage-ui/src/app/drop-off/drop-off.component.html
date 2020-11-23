@@ -1,0 +1,79 @@
+<div class="app-container">
+    <div class="card-header text-warning">
+    <h5>Stow Your Bags | Automatic Luggage Storage with Lockers 
+        <h5 class="text-warning float-right">Available storage lockers:
+            <span class="badge badge-light">{{ numberOfAvailableLockers }}</span> /
+            <span class="badge badge-light">{{ numberTotalOfLockers }}</span>
+        </h5>
+    </h5>
+    </div>
+    <div class="container mt-5 text-center">
+      <!--  <h2 class="mb-5">
+            <span class="badge badge-warning">Available storage lockers:
+                <span class="badge badge-light">{{ numberOfAvailableLockers }}</span> /
+                <span class="badge badge-light">{{ numberTotalOfLockers }}</span>
+            </span>
+        </h2>-->
+        <h3><span class="badge badge-secondary m-3">Only pay for the time spent (per bag)</span></h3>
+        <div class="row mt-3">
+            <div class="col-12 text-center">
+                <h5 class="card-title m-2"> 10 Lei for first hour</h5>
+                <h5 class="card-title m-2">+ 5 Lei for every next hour</h5>
+            </div>
+        </div>
+
+        <div class="row mt-5 mb-3">
+            <div class="col-md-6">
+                <div class="card-container rounded shadow-sm mb-4">
+                    <div class="card-body">
+                        <p class="card-text">Place your luggage and take your unique access code!</p>
+                        <a class="btn btn-lg btn-success m-3" (click)="dropOff()">Drop off your luggage</a>
+                    </div>
+                </div> 
+                <div *ngIf="printCode" class="input-group mt-3 w-50 mx-auto">
+                    <input type="button" (click)="download()" value="Download code" />
+                    <div class="input-group-append">
+                        <input type="button" (click)="cancelDownload()" class="btn btn-outline-danger btn-sm" value="X" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card-container rounded text-center shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">Pick up your luggage with your unique access code!</p>
+                        <a class="btn btn-lg btn-success m-3" (click)="pickUp()">Pick up your luggage</a>
+                    </div>
+                </div>
+                <div *ngIf="pickupBtnClicked" class="input-group mt-3 mb-2">
+                    <input type="text" class="form-control" [formControl]="code$" placeholder="Please introduce your luggage code">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-success" (click)="onSubmit()">Submit code</button>
+                        <button class="btn btn-outline-danger" (click)="cancelSubmit()">Cancel</button>
+                    </div>
+                </div>
+                <h4 *ngIf="pickupMsg" class="card-container m-4">Your luggage was with us:
+                    <span class="badge badge-secondary">{{ releasedLuggage.duration }}</span> minutes. Amount to pay:
+                    <span class="badge badge-secondary">{{ releasedLuggage.price }}</span> lei.
+                </h4>
+                <div *ngIf="pickupMsg" class="mt-3">
+                    <button class="btn btn-outline-success" (click)="releaseLuggage()">
+                        <h4>Pay
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-credit-card-2-back-fill"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5H0V4zm11.5 1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-2z" />
+                                <path d="M0 11v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1H0z" />
+                            </svg>
+                        </h4>
+                    </button>
+                </div>
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-12">
+                <app-alert></app-alert>
+            </div>
+        </div>
+    </div>
+</div>
