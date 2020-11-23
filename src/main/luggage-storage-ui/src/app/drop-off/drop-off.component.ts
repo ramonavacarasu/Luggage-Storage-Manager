@@ -100,20 +100,21 @@ export class DropOffComponent implements OnInit {
     this.printCode = false;
   }
 
-  updateNumberOfAvailableLockers() {
-    this.stowService.numberOfAvailableLockers().subscribe(res => {
-      this.numberOfAvailableLockers = res;
-    });
-  }
-
   releaseLuggage() {
     this.stowService.releaseLuggage(this.releasedLuggage.luggageID)
       .subscribe({
         next: () => {
           this.releasedLuggage = new ReleasedLuggage;
           this.alertService.success("Successfull payment! Please pick-up your luggage!", { autoClose: true });
+          this.updateNumberOfAvailableLockers();
         }
       });
     this.pickupMsg = false;
+  }
+
+  updateNumberOfAvailableLockers() {
+    this.stowService.numberOfAvailableLockers().subscribe(res => {
+      this.numberOfAvailableLockers = res;
+    });
   }
 }

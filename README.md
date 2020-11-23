@@ -4,7 +4,7 @@
 ##### mvn clean install
 
 // Run Angular on port 4200
-##### cd /src/main/luggage-storage-ui
+##### cd src/main/luggage-storage-ui
 ##### npm install
 ##### ng serve
 
