@@ -25,7 +25,7 @@ export class StowService {
         return this.http.post<Locker>(`${this.API}/saveLuggage`, "");
     }
 
-    submitCode(code$: string): Observable<any> {
+    submitCode(code$: string): Observable<ReleasedLuggage> {
         return this.http.post<ReleasedLuggage>(`${this.API}/pickup?code=${code$}`, "");
     }
 

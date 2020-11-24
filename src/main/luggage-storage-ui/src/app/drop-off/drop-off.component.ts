@@ -20,7 +20,8 @@ export class DropOffComponent implements OnInit {
   locker: Locker = new Locker;
   releasedLuggage: ReleasedLuggage = new ReleasedLuggage;
 
-  code$ = new FormControl('', Validators.required);
+  code$ = new FormControl('', Validators.compose([
+        Validators.required, Validators.pattern("^[0-9]+$")]));
 
   numberTotalOfLockers!: string;
   numberOfAvailableLockers!: string;
@@ -66,7 +67,7 @@ export class DropOffComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: (releasedLuggage$) => {
-          if (releasedLuggage$.luggageID !== null) {
+          if (releasedLuggage$.luggageID) {
             this.releasedLuggage = releasedLuggage$;
             this.pickupMsg = true;
             this.pickupBtnClicked = false;
@@ -74,7 +75,7 @@ export class DropOffComponent implements OnInit {
             this.alertService.error("Incorrect code. Try again!", { autoClose: true });
           }
         },
-        error: error => {
+        error: _error => {
           this.alertService.error("No connection with backend!", { autoClose: true });
         }
       });
@@ -90,7 +91,6 @@ export class DropOffComponent implements OnInit {
     this.stowService.downloadFile(this.locker.id)
       .subscribe(res => {
         let blob: any = new Blob([res], { type: 'text/json; charset=utf-8' });
-        const url = window.URL.createObjectURL(blob);
         fileSaver.saveAs(blob, 'luggage.txt');
       });
     this.printCode = false;
@@ -105,7 +105,7 @@ export class DropOffComponent implements OnInit {
       .subscribe({
         next: () => {
           this.releasedLuggage = new ReleasedLuggage;
-          this.alertService.success("Successfull payment! Please pick-up your luggage!", { autoClose: true });
+          this.alertService.success("Successful payment! Please pick-up your luggage!", { autoClose: true });
           this.updateNumberOfAvailableLockers();
         }
       });
