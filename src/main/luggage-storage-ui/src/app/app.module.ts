@@ -28,8 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     StowService,
-    AlertService,
-
+    AlertService
   ],
   bootstrap: [AppComponent]
 })

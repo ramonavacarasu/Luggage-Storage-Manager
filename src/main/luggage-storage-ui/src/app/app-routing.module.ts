@@ -4,7 +4,7 @@ import { DropOffComponent } from './drop-off/drop-off.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'drop-off' },
-  { path: 'drop-off', component: DropOffComponent },
+  { path: 'drop-off', component: DropOffComponent }
 ];
 
 @NgModule({

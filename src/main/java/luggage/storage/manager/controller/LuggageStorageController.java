@@ -87,14 +87,15 @@ public class LuggageStorageController {
         StoredLuggage storedLuggage = storedLuggageService.findByID(id);
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString("This is your luggage code: " + storedLuggage.getLuggageID());
-        byte[] isr = json.substring(1, json.length() - 1).getBytes();
-        String fileName = "luggage.json";
+        byte[] text = json.substring(1, json.length() - 1).getBytes();
+
         HttpHeaders respHeaders = new HttpHeaders();
-        respHeaders.setContentLength(isr.length);
+        respHeaders.setContentLength(text.length);
         respHeaders.setContentType(new MediaType("text", "json"));
         respHeaders.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-        respHeaders.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileName);
-        return new ResponseEntity<>(isr, respHeaders, HttpStatus.OK);
+        respHeaders.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + "luggage.json");
+
+        return new ResponseEntity<>(text, respHeaders, HttpStatus.OK);
     }
 
     private Duration timeCalculator(Instant start) {

@@ -32,7 +32,6 @@ export class AlertComponent implements OnInit, OnDestroy {
                 setTimeout(() => this.removeAlert(alert), 3000);
             }
         });
-
         this.routeSubscription = this.router.events.subscribe(event => {
             if (event instanceof NavigationStart) {
                 this.alertService.clear(this.id);
@@ -46,9 +45,7 @@ export class AlertComponent implements OnInit, OnDestroy {
     }
 
     removeAlert(alert: Alert) {
-
         if (!this.alerts.includes(alert)) return;
-
         if (this.fade) {
             alert.fade = true;
             setTimeout(() => {
@@ -60,7 +57,6 @@ export class AlertComponent implements OnInit, OnDestroy {
     }
 
     cssClass(alert: Alert) {
-
         if (!alert) return;
 
         const classes = ['alert', 'alert-dismissable', 'mt-4', 'container', 'style="width: 80%;"'];

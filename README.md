@@ -1,8 +1,8 @@
 # Luggage Storage Manager
 
-### Run Java Code on 8080
+### Run Java Code on port 8080
 
-### Run Angular on port 4200
+### Run Angular Code on port 4200
 ##### cd src/main/luggage-storage-ui
 ##### npm install
 ##### ng serve
