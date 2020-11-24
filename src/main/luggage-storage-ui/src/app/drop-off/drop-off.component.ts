@@ -21,7 +21,7 @@ export class DropOffComponent implements OnInit {
   releasedLuggage: ReleasedLuggage = new ReleasedLuggage;
 
   code$ = new FormControl('', Validators.compose([
-        Validators.required, Validators.pattern("^[0-9]+$")]));
+        Validators.required, Validators.minLength(4), Validators.pattern("^[0-9]+$")]));
 
   numberTotalOfLockers!: string;
   numberOfAvailableLockers!: string;
