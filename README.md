@@ -14,4 +14,4 @@
 ##### password: password
 
 
-![](Luggage-Storage-Manager/src/main/resources/UI.png)
+![](src/main/resources/UI.png)
